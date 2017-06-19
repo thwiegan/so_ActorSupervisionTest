@@ -6,6 +6,8 @@ import akka.actor.{ActorRef, AllForOneStrategy, SupervisorStrategy}
   */
 class AllForOneParentActor(recipient: ActorRef) extends ParentActor(recipient) {
   override def supervisorStrategy: SupervisorStrategy = AllForOneStrategy() {
-    case _ => Restart
+    case _ =>
+      log.info("Children crashed")
+      SupervisorStrategy.Restart
   }
 }

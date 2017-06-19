@@ -64,6 +64,4 @@ class SupervisorStrategiesTest extends TestKit(ActorSystem("testSystem")) with W
       blankStateAfterRestart shouldBe List(Vector(), Vector())
     }
   }
-
-
 }

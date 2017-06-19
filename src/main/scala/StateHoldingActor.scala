@@ -18,9 +18,9 @@ object StateHoldingActor {
 }
 
 class StateHoldingActor() extends Actor with ActorLogging {
-  log.info("about to create state")
+  //log.info("about to create state")
   private var state = Vector[Int]()
-  log.info(s"state created: $state")
+  //log.info(s"state created: $state")
 
   import StateHoldingActor._
 
@@ -28,12 +28,18 @@ class StateHoldingActor() extends Actor with ActorLogging {
   override def postRestart(reason: Throwable): Unit = {
     super.postRestart(reason)
 
-    log.info(s"Restarting actor with state: $state")
+    //log.info(s"Restarting actor with state: $state")
+  }
+
+  override def preRestart(reason: Throwable, message: Option[Any]): Unit = {
+    super.preRestart(reason, message)
+
+    log.info(s"About to restart actor with state: $state")
   }
 
   override def receive: Receive = {
     case AddStateCommand(i) =>
-      log.info(s"extending state: $state")
+      //log.info(s"extending state: $state")
       state = i +: state
       log.info(s"extended state: $state")
     case GetStateCommand =>
